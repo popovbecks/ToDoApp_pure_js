@@ -1,26 +1,34 @@
-function createTodoItem (title) {
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.className = 'checkbox';
+function createElement (tag, props, ...children) {
+    const element = document.createElement(tag);
     
-    const label = document.createElement('label');
-    label.innerText = title;
-    label.className = 'title';
+    for(let prop in props) {
+        if(!props.hasOwnProperty(prop)) continue;
+        element[prop] = props[prop]; //element.type = props['type'];
+    }
 
-    const editInput = document.createElement('input');
-    editInput.type = 'text';
-    editInput.className = 'textfield';
+    if (children.length > 0) {
+        children.forEach(child => {
+            if(typeof child === 'string') {
+                child = document.createTextNode(child);
+            }
+            element.appendChild(child);
+        });
+    }
+    return element;
+}
 
-    const editButton = document.createElement('button');
-    editButton.innerText = 'Change';
-    editButton.className = 'edit';
+function createTodoItem (title) {
+    const checkbox = createElement('input', { type: 'checkbox', className:'checkbox' });
+    
+    const label = createElement('label', { className: 'title' }, title);
 
-    const deleteButton = document.createElement('button');
-    deleteButton.innerText = 'Delete';
-    deleteButton.className = 'delete';
+    const editInput = createElement('input', { type: 'text', className: 'textfield' });
 
-    const listItem = document.createElement('li');
-    listItem.className = 'todo-item';
+    const editButton = createElement('button', { className: 'edit' }, 'Change');
+
+    const deleteButton = createElement('button', { className: 'delete' }, 'Delete');
+
+    const listItem = createElement('li', { className: 'todo-item' }, checkbox, label, editInput, editButton, deleteButton);
 
     listItem.appendChild(checkbox);
     listItem.appendChild(label);
