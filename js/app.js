@@ -27,8 +27,18 @@ function createTodoItem (title) {
     listItem.appendChild(editInput);
     listItem.appendChild(editButton);
     listItem.appendChild(deleteButton);
-    console.log(listItem);
+    bindEvents(listItem);
     return listItem;
+
+}
+function bindEvents(todoItem) {
+    const checkbox = todoItem.querySelector('.checkbox');
+    const editButton = todoItem.querySelector('button.edit');
+    const deleteButton = todoItem.querySelector('button.delete');
+
+    checkbox.addEventListener('change', toggleTodoItem);
+    editButton.addEventListener('click', editTodoItem);
+    deleteButton.addEventListener('click', deleteTodoItem);
 
 }
 function addTodoItem (event) {
@@ -36,9 +46,40 @@ function addTodoItem (event) {
     
     if(addInput.value === '') return alert("Nesessary add task name");
 
-    const listItem = createTodoItem(addInput.value)
+    const todoItem = createTodoItem(addInput.value);
+    todoList.appendChild(todoItem);
+    addInput.value = '';
 }
 
+//use restructuring, instead event we use {target}
+function toggleTodoItem ({ target }) {
+    const listItem = target.parentNode;
+    listItem.classList.toggle('completed');
+}
+
+//use "this" like access to event element
+function editTodoItem () {
+    const listItem = this.parentNode;
+    const title = listItem.querySelector('.title');
+    const editInput = listItem.querySelector('.textfield');
+    const isEditing = listItem.classList.contains('editing');
+
+    if (isEditing) {
+        title.innerText = editInput.value;
+        this.innerText = 'Change';
+    } else {
+        editInput.value = title.innerText;
+        this.innerText = 'Save';
+
+    }
+    listItem.classList.toggle('editing');
+}
+
+
+function deleteTodoItem () {
+    const listItem = this.parentNode;
+    todoList.removeChild(listItem);
+}
 const todoForm = document.querySelector('#todo-form');
 const addInput = document.querySelector('#add-input');
 const todoList = document.querySelector('#todo-list');
