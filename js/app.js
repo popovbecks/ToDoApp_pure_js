@@ -85,5 +85,9 @@ const addInput = document.querySelector('#add-input');
 const todoList = document.querySelector('#todo-list');
 const todoItems = document.querySelectorAll('.todo-item');
 
+function main () {
+    todoForm.addEventListener('submit', addTodoItem);
+    todoItems.forEach((item)=>bindEvents(item))
+}
 
-todoForm.addEventListener('submit', addTodoItem);
+main();
