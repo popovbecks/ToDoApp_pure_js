@@ -72,9 +72,7 @@ const main = ((document) => {
     }
 
     //use restructuring, instead event we use {target} from event object
-    function toggleTodoItem({
-        target
-    }) {
+    function toggleTodoItem({ target }) {
         if (target.className != 'checkbox') return;
         const listItem = target.parentNode;
         listItem.classList.toggle('completed');
