@@ -79,9 +79,7 @@ const main = ((document) => {
     }
 
 
-    function editTodoItem({
-        target
-    }) {
+    function editTodoItem({ target }) {
         if (target.className != 'edit') return;
         const listItem = target.parentNode;
         const title = listItem.querySelector('.title');
