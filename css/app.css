@@ -1,10 +1,10 @@
-body {
+html, body {
     background-color: #fafafa;
     color: #757575;
     font-family: 'Consolas', Arial, Helvetica, sans-serif;
     margin: 0;
+    height: 100%;
 }
-
 ul {
     list-style: none;
     margin: 0;
@@ -78,14 +78,35 @@ input {
     border: 1px solid lightgray;
     outline: none;
 }
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100%;
+}
 
 main {
     background: #fff;
-    width: 700px;
+    max-width: 700px;
+    min-width: 700px;
     margin: 70px auto;
     border-radius: 2px;
     overflow: hidden;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; 
+}
+main .head {
+    background: #757575;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+.head h2 {
+    color: #F9F9F9;
+    display: inline-block;
 }
 
 header {
@@ -93,22 +114,45 @@ header {
     align-items: center;
     padding: 0 1rem;
     color: white;
-    background-color: #f0db4f;
+    background-color: #3F7AA5;
     text-align: center;
     text-transform: uppercase;
 }
 
 header h1 {
     display: inline-block;
-    color: #323330;
+    color: #F9F9F9;
     margin: 1rem auto;
+}
+footer {
+    background-color: #757575;
+    height: 50px;
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    color: #F9F9F9;
+}
+footer p{
+    margin-left: 40px;
 }
 
 
 
 /* Todo Item */
+.todo-list-container{
+    min-height: 100%;
+    overflow-y: auto;
+}
+.todo-message{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center; 
+}
+.todo-message.hide{
+    display: none;
+}
 .todo-item {
-    display: flex;
+     display: flex; 
     font-size: 1rem;
     border-top: 1px solid rgba(0,0,0,.1);
     background-color: #fff;
@@ -172,12 +216,32 @@ header h1 {
     flex: 1;
     outline: none;
     transition: all .2s;
+    border-radius: 6px;
 }
 
 #todo-form input:focus {
-    border: 1px solid #f0db4f;
+    border: 1px solid #3F7AA5;
 }
 
 #todo-form button {
     margin-left: 10px;
+}
+
+/* Media queries styles  */
+
+@media screen and (max-width: 708px) {
+    main{
+        min-width: 500px;
+    } 
+    button, input, .title {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 501px) {
+    main{
+        min-width: 400px;
+    } 
+    button, input, .title {
+        font-size: 10px;
+    }
 }
